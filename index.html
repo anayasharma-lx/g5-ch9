@@ -1,100 +1,631 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chapter 7 · Subtraction of Greater Numbers</title>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Chapter 9 · Measuring Length</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--burg:#5A1A00;--wood:#8B4513;--gold:#D4A017;--goldl:#F5C518;--cream:#FFF8E8;--red:#C0392B}
-html,body{width:100%;min-height:100vh}
-body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#3A0A00 0%,#5A1A00 40%,#8B4513 100%);min-height:100vh;padding:0 0 32px;display:flex;flex-direction:column;align-items:center;}
-.chest-header{width:100%;background:linear-gradient(135deg,#3A0A00,#5A1A00);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--gold);position:relative;}
-.gold-shine{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),transparent);animation:shine 2s ease infinite}
-@keyframes shine{0%{opacity:0;transform:translateX(-100%)}50%{opacity:1}100%{opacity:0;transform:translateX(100%)}}
-.ch-title{font-family:'Fredoka One',cursive;font-size:26px;color:var(--goldl);z-index:1;text-shadow:0 0 16px rgba(245,197,24,.4)}
-.ch-chip{background:var(--gold);color:#3A0A00;font-size:12px;font-weight:900;padding:5px 14px;border-radius:20px;z-index:1;border:2px solid rgba(255,255,255,.2)}
-.page{width:100%;max-width:580px;padding:16px;display:flex;flex-direction:column;gap:20px}
-.tcard{background:var(--cream);border-radius:24px;padding:22px;box-shadow:0 6px 0 rgba(0,0,0,.25),0 2px 24px rgba(0,0,0,.2);border:3px solid rgba(255,248,232,.9);position:relative;overflow:hidden}
-.tcard::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;border-radius:24px 24px 0 0;background:var(--gold)}
-.tc-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--burg);margin-bottom:4px}
-.hint{font-size:13px;font-weight:700;color:var(--wood);margin-bottom:16px;line-height:1.5}
-.col-wrapper{display:flex;justify-content:center;margin-bottom:20px}
-.sum-table{display:grid;grid-template-columns:64px 72px 72px;row-gap:0;align-items:center}
-.cell{width:72px;height:62px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-family:'Fredoka One',cursive;font-size:44px;color:var(--burg)}
-.cell.on{background:#FFE8C0}
-.cell.crossed{color:#C0A080;font-size:36px;text-decoration:line-through}
-.hdr{width:72px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:#AAA;border-radius:8px}
-.hdr.on{color:var(--wood);background:#FFE8C0}
-.bw-wrap{width:72px;height:32px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
-.bw-old{font-family:'Fredoka One',cursive;font-size:14px;color:#9CA3AF;text-decoration:line-through;line-height:1.1}
-.bw-new{font-family:'Fredoka One',cursive;font-size:20px;color:var(--red);line-height:1.1}
-.op{width:64px;height:62px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:36px;color:var(--red)}
-.ans-cell{width:72px;height:68px;display:flex;align-items:center;justify-content:center;border-radius:14px;border:3px solid #F5DFA0;background:#FFF8E8}
-.ans-cell.on{border-color:var(--gold);background:#FFE8C0}
-.ans-cell.done{border-color:#16A34A;background:#D4F5D4}
-.ans-cell.err{border-color:var(--red);background:#FFE0E0;animation:shake .35s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.ans-input{font-family:'Fredoka One',cursive;font-size:44px;font-weight:400;width:60px;height:60px;border:none;background:transparent;text-align:center;color:var(--burg);outline:none;-moz-appearance:textfield}
-.ans-input::-webkit-outer-spin-button,.ans-input::-webkit-inner-spin-button{-webkit-appearance:none}
-.ans-input:disabled{color:#16A34A}
-.blank-dig{font-family:'Fredoka One',cursive;font-size:38px;color:#DDD}
-.instr{background:linear-gradient(135deg,#FFF8E8,#FFE8C0);border-radius:16px;padding:14px 16px;border:2.5px solid #F5DFA0;margin-bottom:12px;font-size:15px;font-weight:700;color:var(--burg);line-height:1.7}
-.instr strong{color:var(--wood)}.bw{color:var(--red);font-weight:900}
-.fb{min-height:26px;font-family:'Fredoka One',cursive;font-size:17px;text-align:center;margin-bottom:10px}
-.fb.g{color:#16A34A}.fb.b{color:var(--red)}
-.done-box{background:#D4F5D4;border-radius:16px;padding:14px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#065F46;margin-bottom:12px;display:none}
-.btn-row{display:flex;gap:10px;flex-wrap:wrap}
-.go-btn{background:linear-gradient(135deg,var(--gold),var(--wood));color:#fff;border:none;border-radius:14px;padding:12px 26px;font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:all .18s}
-.go-btn:hover{transform:scale(1.06)}
-.new-btn{background:#fff;border:2.5px solid #F5DFA0;color:var(--wood);font-family:'Fredoka One',cursive;font-size:14px;padding:10px 22px;border-radius:14px;cursor:pointer}
-</style></head><body>
-<div class="chest-header"><div class="gold-shine"></div><div class="ch-title">💰 Subtraction of Greater Numbers</div><div class="ch-chip">Chapter 7</div></div>
-<div class="page"><div class="tcard">
-<div class="tc-title">🔢 Type the answer — one column at a time!</div>
-<div class="hint">The gold column is where you work. Read the instruction — sometimes we need to <strong>borrow</strong> from the Tens column! Type the digit, press Check, then move left.</div>
-<div class="col-wrapper"><div class="sum-table" id="sumTable"></div></div>
-<div class="instr" id="instr">Press "New problem" to start!</div>
-<div class="fb" id="fb"></div>
-<div class="done-box" id="doneBox"></div>
-<div class="btn-row">
-  <button class="go-btn" id="goBtn" onclick="check()" style="display:none">Check ✓</button>
-  <button class="new-btn" onclick="newProblem()">New problem ↻</button>
+:root{
+  --bench:#8B6914;--bench2:#6B4F0E;--bench-light:#C8A045;
+  --teal:#0E7C7B;--teal2:#0A5C5B;--teal-light:#B8EEEE;
+  --orange:#D4621A;--orange2:#A84D15;--orange-light:#FDDDC4;
+  --paper:#FBF5E8;--paper2:#F2E8CF;--paper3:#E8D9B5;
+  --ink:#1A1208;--ink2:#4A3A1A;--ink3:#8A7050;
+  --rule:#C8B890;
+  --sans:'Syne',sans-serif;--serif:'Instrument Serif',serif;--mono:'Space Mono',monospace;
+}
+html,body{width:100%;min-height:100vh;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+
+/* wood grain */
+body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.03;
+  background:repeating-linear-gradient(85deg,transparent 0,transparent 12px,#5A3A08 12px,#5A3A08 13px)}
+
+/* HEADER */
+.header{background:var(--bench);padding:0 24px;display:flex;align-items:center;gap:16px;height:56px;
+  border-bottom:3px solid var(--bench2);position:sticky;top:0;z-index:100;
+  box-shadow:0 4px 20px rgba(0,0,0,0.25)}
+.header-icon{width:36px;height:36px;background:var(--bench-light);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.header-title{font-family:var(--serif);font-size:22px;color:#FFF8E8;font-style:italic}
+.header-sub{font-family:var(--mono);font-size:10px;color:rgba(255,248,232,0.55);letter-spacing:1.5px;text-transform:uppercase}
+.header-tabs{margin-left:auto;display:flex;gap:0;background:rgba(0,0,0,0.2);border-radius:8px;padding:3px}
+.tab{padding:7px 18px;font-family:var(--mono);font-size:11px;letter-spacing:.5px;color:rgba(255,248,232,0.55);cursor:pointer;border-radius:6px;transition:.2s;border:none;background:none}
+.tab.on{background:var(--paper);color:var(--ink);font-weight:700}
+.tab:hover:not(.on){color:rgba(255,248,232,0.85)}
+
+/* MAIN LAYOUT */
+.main{max-width:900px;margin:0 auto;padding:24px 16px 60px;position:relative;z-index:1}
+
+/* WORKBENCH */
+.workbench{
+  background:var(--bench);border-radius:12px;padding:20px;
+  box-shadow:0 8px 32px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.1);
+  border:2px solid var(--bench2);margin-bottom:20px;position:relative;
+}
+.workbench::before{content:'';position:absolute;inset:0;border-radius:10px;opacity:.05;pointer-events:none;
+  background:repeating-linear-gradient(90deg,transparent 0,transparent 20px,#000 20px,#000 21px)}
+.bench-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light);margin-bottom:12px}
+
+/* ROPE POOL */
+.rope-pool{display:flex;flex-wrap:wrap;gap:10px;min-height:80px;margin-bottom:16px}
+.rope-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--paper);border:2px solid var(--rule);border-radius:8px;
+  padding:8px 14px;cursor:grab;user-select:none;transition:.2s;position:relative;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);
+}
+.rope-chip:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,0.2)}
+.rope-chip:active{cursor:grabbing;transform:scale(.96)}
+.rope-chip.dragging{opacity:.4;transform:scale(.9)}
+.rope-visual{height:8px;border-radius:4px;background:linear-gradient(90deg,var(--teal) 0%,var(--teal2) 50%,var(--teal) 100%);
+  min-width:20px;max-width:80px}
+.rope-chip .length-badge{font-size:11px;font-family:var(--mono);color:var(--ink3)}
+
+/* WORKBENCH DROP ZONE */
+.drop-zone{
+  background:rgba(0,0,0,0.2);border:2px dashed var(--bench-light);border-radius:10px;
+  min-height:80px;padding:16px 12px;display:flex;flex-direction:row;align-items:center;gap:0;
+  transition:.2s;position:relative;flex-wrap:nowrap;overflow-x:auto;
+}
+.drop-zone.drag-over{background:rgba(14,124,123,0.15);border-color:var(--teal)}
+.drop-zone-hint{font-family:var(--serif);font-style:italic;font-size:14px;color:rgba(255,255,255,0.35);text-align:center;padding:20px}
+
+/* PLACED ROPE */
+.placed-rope{
+  display:flex;align-items:center;gap:0;height:36px;overflow:visible;
+  position:relative;cursor:pointer;transition:.2s;flex-shrink:0;
+}
+.placed-rope:hover .rope-delete{opacity:1}
+.rope-segment{height:22px;border-radius:0;position:relative;flex-shrink:0}
+.rope-segment::after{content:'';position:absolute;top:3px;left:4px;right:4px;height:4px;background:rgba(255,255,255,0.25);border-radius:2px}
+.rope-delete{position:absolute;right:-8px;top:50%;transform:translateY(-50%);width:20px;height:20px;background:#DC2626;border-radius:50%;border:none;cursor:pointer;color:#fff;font-size:14px;display:flex;align-items:center;justify-content:center;opacity:0;transition:.15s;font-weight:700;line-height:1;z-index:10}
+.rope-label{font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,0.5);padding:0 6px;white-space:nowrap}
+.rope-knot{width:10px;height:22px;background:#8B6010;border-radius:50%;flex-shrink:0;z-index:2;box-shadow:0 0 0 2px rgba(255,255,255,0.2);position:relative;}
+.rope-first .rope-segment{border-radius:4px 0 0 4px}
+.rope-segment:last-of-type{border-radius:0 4px 4px 0}
+
+/* RESULT DISPLAY */
+.result-panel{
+  background:var(--paper);border-radius:10px;padding:16px 20px;border:2px solid var(--rule);
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+}
+.result-main{flex:1}
+.result-label{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:4px}
+.result-value{font-family:var(--mono);font-size:28px;font-weight:700;color:var(--teal)}
+.result-breakdown{font-size:13px;color:var(--ink3);font-family:var(--mono)}
+.conversion-reveal{
+  background:var(--teal-light);border:2px solid var(--teal);border-radius:8px;padding:10px 14px;
+  font-family:var(--serif);font-style:italic;font-size:13px;color:var(--teal2);display:none;
+}
+.conversion-reveal.show{display:block;animation:slideIn .4s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+/* TOOLS */
+.tools{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tool-btn{
+  display:flex;align-items:center;gap:6px;padding:8px 16px;
+  background:var(--paper2);border:2px solid var(--rule);border-radius:8px;
+  font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.5px;
+  cursor:pointer;transition:.2s;color:var(--ink2);
+}
+.tool-btn:hover{border-color:var(--orange);color:var(--orange)}
+.tool-btn.active{background:var(--orange-light);border-color:var(--orange);color:var(--orange2)}
+.tool-icon{font-size:16px}
+
+/* SCISSORS DEMO */
+.scissors-demo{background:var(--paper2);border:2px solid var(--rule);border-radius:10px;padding:16px;margin-top:12px;display:none}
+.scissors-demo.show{display:block;animation:slideIn .3s ease}
+.scissors-input{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap}
+.scissors-input label{font-family:var(--mono);font-size:12px;color:var(--ink3)}
+.scissors-input select,.scissors-input input{
+  font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink);
+  background:var(--paper);border:2px solid var(--rule);border-radius:6px;padding:6px 10px;
+}
+.cut-btn{background:var(--orange);color:#fff;border:none;border-radius:6px;padding:8px 16px;
+  font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
+.cut-btn:hover{background:var(--orange2)}
+.cut-result{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px}
+.cut-piece{background:var(--paper);border:2px solid var(--rule);border-radius:8px;padding:10px 14px;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);text-align:center}
+
+/* MULTIPLY DEMO */
+.stretch-demo{background:var(--paper2);border:2px solid var(--rule);border-radius:10px;padding:16px;margin-top:12px;display:none}
+.stretch-demo.show{display:block;animation:slideIn .3s ease}
+.stretch-result{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-top:12px;overflow-x:auto;padding-bottom:4px}
+.stretch-seg{height:28px;min-width:60px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;flex-shrink:0}
+.stretch-plus{font-family:var(--mono);font-size:16px;font-weight:700;color:var(--ink3)}
+
+/* COMPARE */
+.compare-demo{background:var(--paper2);border:2px solid var(--rule);border-radius:10px;padding:16px;margin-top:12px;display:none}
+.compare-demo.show{display:block;animation:slideIn .3s ease}
+.compare-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.compare-bar{height:24px;border-radius:4px;display:flex;align-items:center;padding-left:8px;
+  font-family:var(--mono);font-size:11px;font-weight:700;color:#fff;min-width:20px;transition:width .5s cubic-bezier(.36,1.4,.6,1)}
+.compare-label{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink2);min-width:80px}
+.diff-marker{background:var(--orange-light);border:2px solid var(--orange);border-radius:6px;padding:8px 14px;
+  font-family:var(--mono);font-size:13px;font-weight:700;color:var(--orange2);margin-top:8px;display:inline-block}
+
+/* PRACTICE PANEL */
+.practice-card{background:var(--paper);border:2px solid var(--rule);border-radius:12px;padding:20px;margin-bottom:16px}
+.practice-q{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--ink);margin-bottom:16px;line-height:1.5}
+.practice-q strong{font-style:normal;font-family:var(--mono);font-size:22px;color:var(--teal);font-weight:700}
+.ans-options{display:flex;gap:8px;flex-wrap:wrap}
+.ans-opt{
+  padding:10px 20px;background:var(--paper2);border:2px solid var(--rule);border-radius:8px;
+  font-family:var(--mono);font-size:15px;font-weight:700;cursor:pointer;transition:.2s;color:var(--ink);
+}
+.ans-opt:hover{border-color:var(--teal);background:var(--teal-light);color:var(--teal2)}
+.ans-opt.correct{background:#DCFCE7;border-color:#16A34A;color:#14532D;animation:pop .35s ease}
+.ans-opt.wrong{background:#FEE2E2;border-color:#DC2626;color:#7F1D1D;animation:shk .35s ease}
+@keyframes pop{0%{transform:scale(1)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.practice-fb{min-height:24px;margin-top:12px;font-family:var(--serif);font-style:italic;font-size:15px}
+.practice-fb.ok{color:#16A34A}.practice-fb.no{color:#DC2626}
+.next-btn{margin-top:16px;background:var(--teal);color:#fff;border:none;border-radius:8px;padding:10px 24px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;letter-spacing:.5px;transition:.15s}
+.next-btn:hover{background:var(--teal2)}
+
+.pnl{display:none}.pnl.on{display:block}
+
+/* mobile */
+@media(max-width:600px){
+  .header{height:auto;padding:10px 16px;flex-wrap:wrap;gap:8px}
+  .header-tabs{width:100%;justify-content:center}
+  .tools{gap:6px}
+  .tool-btn{font-size:10px;padding:6px 12px}
+  .result-value{font-size:22px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-icon">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <rect x="2" y="9" width="16" height="3" rx="1.5" fill="#FBF5E8"/>
+      <circle cx="2" cy="10.5" r="2" fill="#C8A045"/>
+      <circle cx="18" cy="10.5" r="2" fill="#C8A045"/>
+      <line x1="5" y1="7" x2="5" y2="13" stroke="#C8A045" stroke-width="1" stroke-dasharray="2"/>
+      <line x1="10" y1="7" x2="10" y2="13" stroke="#C8A045" stroke-width="1" stroke-dasharray="2"/>
+      <line x1="15" y1="7" x2="15" y2="13" stroke="#C8A045" stroke-width="1" stroke-dasharray="2"/>
+    </svg>
+  </div>
+  <div>
+    <div class="header-title">Rope &amp; Measurement Workshop</div>
+    <div class="header-sub">Chapter 9 · Measuring Length</div>
+  </div>
+  <div class="header-tabs">
+    <button class="tab on" onclick="switchTab('learn')">Workshop</button>
+    <button class="tab" onclick="switchTab('practice')">Practice</button>
+  </div>
 </div>
-</div></div>
+
+<div class="main">
+
+<!-- LEARN TAB -->
+<div class="pnl on" id="pnl-learn">
+  
+  <!-- Rope pool -->
+  <div class="workbench">
+    <div class="bench-label">Rope store — drag ropes to the bench</div>
+    <div class="rope-pool" id="rope-pool"></div>
+  </div>
+
+  <!-- Bench / drop zone -->
+  <div class="workbench">
+    <div class="bench-label">Workbench</div>
+    <div class="drop-zone" id="drop-zone">
+      <div class="drop-zone-hint" id="drop-hint">Drag ropes here to join them</div>
+    </div>
+    
+    <div style="margin-top:16px">
+      <div class="result-panel" id="result-panel">
+        <div class="result-main">
+          <div class="result-label">Total length</div>
+          <div class="result-value" id="result-value">0 cm</div>
+          <div class="result-breakdown" id="result-breakdown"></div>
+        </div>
+        <div id="conversion-area"></div>
+      </div>
+      <div class="conversion-reveal" id="conv-reveal"></div>
+    </div>
+
+    <div style="margin-top:12px;display:flex;gap:8px">
+      <button class="tool-btn" onclick="clearBench()" style="background:#FEECEC;border-color:#DC2626;color:#B91C1C">✕ Clear bench</button>
+    </div>
+  </div>
+
+  <!-- Tool tray -->
+  <div class="workbench">
+    <div class="bench-label">Tools</div>
+    <div class="tools">
+      <button class="tool-btn" id="tool-scissors" onclick="toggleTool('scissors')">
+        <span class="tool-icon">✂️</span> Scissors (divide)
+      </button>
+      <button class="tool-btn" id="tool-stretch" onclick="toggleTool('stretch')">
+        <span class="tool-icon">↔</span> Stretch (multiply)
+      </button>
+      <button class="tool-btn" id="tool-compare" onclick="toggleTool('compare')">
+        <span class="tool-icon">⚖</span> Compare
+      </button>
+    </div>
+
+    <!-- Scissors -->
+    <div class="scissors-demo" id="scissors-demo">
+      <div class="scissors-input">
+        <label>Rope:</label>
+        <select id="cut-len">
+          <option value="100">1 m (100 cm)</option>
+          <option value="150">1 m 50 cm</option>
+          <option value="200">2 m</option>
+          <option value="250">2 m 50 cm</option>
+          <option value="300">3 m</option>
+          <option value="500">5 m</option>
+        </select>
+        <label>÷</label>
+        <select id="cut-by">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button class="cut-btn" onclick="doCut()">✂ Cut!</button>
+      </div>
+      <div class="cut-result" id="cut-result"></div>
+    </div>
+
+    <!-- Stretch -->
+    <div class="stretch-demo" id="stretch-demo">
+      <div class="scissors-input">
+        <label>Rope:</label>
+        <select id="str-len">
+          <option value="50">50 cm</option>
+          <option value="100">1 m</option>
+          <option value="120">1 m 20 cm</option>
+          <option value="150">1 m 50 cm</option>
+          <option value="200">2 m</option>
+          <option value="240">2 m 40 cm</option>
+        </select>
+        <label>×</label>
+        <select id="str-by">
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <button class="cut-btn" onclick="doStretch()">↔ Stretch!</button>
+      </div>
+      <div class="stretch-result" id="stretch-result"></div>
+    </div>
+
+    <!-- Compare -->
+    <div class="compare-demo" id="compare-demo">
+      <div class="scissors-input">
+        <label>Rope A:</label>
+        <select id="cmp-a">
+          <option value="100">1 m</option>
+          <option value="120">1 m 20 cm</option>
+          <option value="150">1 m 50 cm</option>
+          <option value="200">2 m</option>
+          <option value="240">2 m 40 cm</option>
+          <option value="300">3 m</option>
+          <option value="350">3 m 50 cm</option>
+        </select>
+        <label>Rope B:</label>
+        <select id="cmp-b">
+          <option value="75">75 cm</option>
+          <option value="100">1 m</option>
+          <option value="120">1 m 20 cm</option>
+          <option value="150" selected>1 m 50 cm</option>
+          <option value="180">1 m 80 cm</option>
+          <option value="250">2 m 50 cm</option>
+          <option value="300">3 m</option>
+        </select>
+        <button class="cut-btn" onclick="doCompare()">⚖ Compare!</button>
+      </div>
+      <div id="compare-result"></div>
+    </div>
+  </div>
+
+  <!-- Discovery hint -->
+  <div style="background:var(--teal-light);border:2px solid var(--teal);border-radius:10px;padding:14px 18px">
+    <div style="font-family:var(--serif);font-style:italic;font-size:15px;color:var(--teal2);line-height:1.7">
+      What happens when you join ropes that add up to 100 cm? Watch the measurement change…<br>
+      <strong style="font-style:normal;font-family:var(--mono);font-size:13px">100 cm = 1 m</strong> — discovered through building, not memorising.
+    </div>
+  </div>
+</div>
+
+<!-- PRACTICE TAB -->
+<div class="pnl" id="pnl-practice">
+  <div class="practice-card" id="pq-card">
+    <div class="practice-q" id="pq-text">Loading…</div>
+    <div class="ans-options" id="pq-opts"></div>
+    <div class="practice-fb" id="pq-fb"></div>
+    <button class="next-btn" onclick="nextQ()">Next question →</button>
+  </div>
+</div>
+
+</div>
+
 <script>
-let N1,N2,tensN1,onesN1,tensN2,onesN2,borrowed,tensEff,onesEff,ansT,ansO,step;
-const SOLVE_ORDER=[1,0];
-function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
-function generate(){N2=rand(11,79);N1=rand(N2+1,Math.min(N2+40,99));}
-function init(){tensN1=Math.floor(N1/10);onesN1=N1%10;tensN2=Math.floor(N2/10);onesN2=N2%10;borrowed=onesN1<onesN2;onesEff=borrowed?onesN1+10:onesN1;tensEff=borrowed?tensN1-1:tensN1;ansO=onesEff-onesN2;ansT=tensEff-tensN2;step=0;}
-function solvedSet(){return new Set(SOLVE_ORDER.slice(0,step));}
-function draw(){
-  const solved=solvedSet();const cur=SOLVE_ORDER[step];const tbl=document.getElementById('sumTable');let html='';
-  html+=`<div></div><div class="hdr${cur===0?' on':''}">T</div><div class="hdr${cur===1?' on':''}">O</div>`;
-  html+=`<div></div><div class="bw-wrap"></div>`;
-  if(borrowed&&(cur===1||solved.has(1)))html+=`<div class="bw-wrap"><span class="bw-new">${onesEff}</span></div>`;else html+=`<div class="bw-wrap"></div>`;
-  const tensCrossed=borrowed&&solved.has(1);
-  html+=`<div></div><div class="cell${cur===0?' on':''}${tensCrossed?' crossed':''}">${tensN1}</div>`;
-  const onesCrossed=borrowed&&(cur===1||solved.has(1));
-  html+=`<div class="cell${cur===1?' on':''}${onesCrossed?' crossed':''}">${onesN1}</div>`;
-  html+=`<div class="op">−</div><div class="cell${cur===0?' on':''}">${tensN2}</div><div class="cell${cur===1?' on':''}">${onesN2}</div>`;
-  html+=`<div></div><div style="grid-column:2/4;border-top:3px solid var(--burg);margin:4px 0"></div><div style="display:none"></div>`;
-  html+=`<div></div>`;
-  if(solved.has(0))html+=`<div class="ans-cell done"><input class="ans-input" value="${ansT}" disabled></div>`;else if(cur===0)html+=`<div class="ans-cell on" id="curCell"><input class="ans-input" id="curIn" type="number" min="0" max="9" placeholder="?" autocomplete="off"></div>`;else html+=`<div class="ans-cell"><span class="blank-dig">_</span></div>`;
-  if(solved.has(1))html+=`<div class="ans-cell done"><input class="ans-input" value="${ansO}" disabled></div>`;else if(cur===1)html+=`<div class="ans-cell on" id="curCell"><input class="ans-input" id="curIn" type="number" min="0" max="9" placeholder="?" autocomplete="off"></div>`;else html+=`<div class="ans-cell"><span class="blank-dig">_</span></div>`;
-  tbl.innerHTML=html;
-  const inp=document.getElementById('curIn');if(inp){inp.oninput=()=>{if(inp.value.length>1)inp.value=inp.value.slice(-1);};inp.onkeydown=e=>{if(e.key==='Enter')check();};inp.focus();}
+// -- DATA --
+const ROPES = [
+  {cm:75, label:'75 cm', color:'#0E7C7B'},
+  {cm:100, label:'1 m', color:'#D4621A'},
+  {cm:120, label:'1 m 20 cm', color:'#7B4A9A'},
+  {cm:150, label:'1 m 50 cm', color:'#2E7D32'},
+  {cm:200, label:'2 m', color:'#B45309'},
+  {cm:240, label:'2 m 40 cm', color:'#0369A1'},
+  {cm:300, label:'3 m', color:'#C2410C'},
+  {cm:50, label:'50 cm', color:'#6D28D9'},
+];
+
+let benchRopes = [];
+let activeTool = null;
+let dragSrc = null;
+
+// -- HELPERS --
+function fmtCm(cm){
+  const m = Math.floor(cm/100);
+  const c = cm%100;
+  if(m===0) return c+' cm';
+  if(c===0) return m+' m';
+  return m+' m '+c+' cm';
 }
-function buildInstr(){
-  const cur=SOLVE_ORDER[step];let html;
-  if(cur===1){if(borrowed){html=`<strong>O column</strong> (gold): The top digit (${onesN1}) is smaller, so we <span class="bw">borrow 10</span> from Tens.<br>The top digit becomes <strong>${onesEff}</strong>. ${onesEff} − ${onesN2} = <strong>${ansO}</strong>. Write <strong>${ansO}</strong>.`;}else{html=`<strong>O column</strong> (gold): ${onesN1} − ${onesN2} = <strong>${ansO}</strong>. Write <strong>${ansO}</strong>.`;}}
-  else{if(borrowed){html=`<strong>T column</strong> (gold): We borrowed 1, so the top digit is now ${tensEff}.<br>${tensEff} − ${tensN2} = <strong>${ansT}</strong>. Write <strong>${ansT}</strong>.`;}else{html=`<strong>T column</strong> (gold): ${tensN1} − ${tensN2} = <strong>${ansT}</strong>. Write <strong>${ansT}</strong>.`;}}
-  document.getElementById('instr').innerHTML=html;
+
+function ropeWidth(cm, maxCm, maxPx){
+  return Math.max(40, Math.round((cm/maxCm)*maxPx));
 }
-function check(){
-  const cur=SOLVE_ORDER[step];const correct=cur===1?ansO:ansT;const inp=document.getElementById('curIn');if(!inp)return;const v=parseInt(inp.value);const fb=document.getElementById('fb');
-  if(isNaN(v)){fb.textContent='Type a digit 0–9!';fb.className='fb b';return;}
-  if(v===correct){fb.textContent='✓ Correct! ⭐';fb.className='fb g';document.getElementById('curCell').classList.replace('on','done');step++;setTimeout(()=>{fb.textContent='';if(step>=SOLVE_ORDER.length)done();else{draw();buildInstr();}},600);}
-  else{fb.textContent='Not right — re-read the instruction!';fb.className='fb b';const cell=document.getElementById('curCell');cell.classList.add('err');inp.value='';inp.focus();setTimeout(()=>cell.classList.remove('err'),500);}
+
+// -- ROPE POOL --
+function buildPool(){
+  const pool = document.getElementById('rope-pool');
+  pool.innerHTML = '';
+  ROPES.forEach((r,i)=>{
+    const chip = document.createElement('div');
+    chip.className = 'rope-chip';
+    chip.draggable = true;
+    chip.dataset.idx = i;
+    const w = Math.min(80, Math.max(20, Math.round(r.cm/300*80)));
+    chip.innerHTML = `<div class="rope-visual" style="width:${w}px;background:${r.color}"></div>
+      <span>${r.label}</span>`;
+    chip.addEventListener('dragstart', e=>{
+      dragSrc = {type:'pool', idx:i};
+      chip.classList.add('dragging');
+      e.dataTransfer.effectAllowed='copy';
+    });
+    chip.addEventListener('dragend', ()=>chip.classList.remove('dragging'));
+    // tap / click for mobile
+    chip.addEventListener('click', ()=>addToBench(i));
+    pool.appendChild(chip);
+  });
 }
-function done(){draw();document.getElementById('doneBox').style.display='block';document.getElementById('doneBox').textContent=`🎉 ${N1} − ${N2} = ${N1-N2}! Brilliant! 💰`;document.getElementById('instr').style.opacity='.35';document.getElementById('goBtn').style.display='none';document.getElementById('fb').textContent='';}
-function newProblem(){generate();init();document.getElementById('doneBox').style.display='none';document.getElementById('instr').style.opacity='1';document.getElementById('goBtn').style.display='inline-block';document.getElementById('fb').textContent='';document.getElementById('fb').className='fb';draw();buildInstr();}
-newProblem();
-</script></body></html>
+
+// -- DROP ZONE --
+function setupDropZone(){
+  const dz = document.getElementById('drop-zone');
+  dz.addEventListener('dragover', e=>{e.preventDefault();dz.classList.add('drag-over')});
+  dz.addEventListener('dragleave', ()=>dz.classList.remove('drag-over'));
+  dz.addEventListener('drop', e=>{
+    e.preventDefault();dz.classList.remove('drag-over');
+    if(dragSrc && dragSrc.type==='pool') addToBench(dragSrc.idx);
+    dragSrc=null;
+  });
+}
+
+function addToBench(idx){
+  benchRopes.push({...ROPES[idx], id:Date.now()+Math.random()});
+  renderBench();
+}
+
+function removeBench(id){
+  benchRopes = benchRopes.filter(r=>r.id!==id);
+  renderBench();
+}
+
+function clearBench(){
+  benchRopes = [];
+  renderBench();
+}
+
+function renderBench(){
+  const dz = document.getElementById('drop-zone');
+  const hint = document.getElementById('drop-hint');
+  // Remove all existing rope elements
+  dz.querySelectorAll('.placed-rope,.rope-knot-join').forEach(n=>n.remove());
+  hint.style.display = benchRopes.length?'none':'block';
+
+  const totalCm = benchRopes.reduce((a,r)=>a+r.cm,0);
+  const dzW = dz.clientWidth || 500;
+  const MAX_W = Math.min(dzW - 40, 560);
+
+  benchRopes.forEach((r, idx)=>{
+    // Add knot connector between ropes
+    if(idx > 0){
+      const knot = document.createElement('div');
+      knot.className = 'rope-knot-join';
+      knot.style.cssText = 'width:12px;height:22px;background:radial-gradient(circle at 50% 50%,#C8A045,#6B4A0E);border-radius:50%;flex-shrink:0;z-index:3;box-shadow:0 0 0 2px rgba(255,255,255,0.25),inset 0 0 4px rgba(0,0,0,0.4);align-self:center;';
+      dz.appendChild(knot);
+    }
+    const rope = document.createElement('div');
+    rope.className = 'placed-rope';
+    const w = ropeWidth(r.cm, Math.max(totalCm,300), MAX_W);
+    const seg = document.createElement('div');
+    seg.className = 'rope-segment';
+    const isFirst = idx===0;
+    const isLast = idx===benchRopes.length-1;
+    const br = isFirst&&isLast?'4px' : isFirst?'4px 0 0 4px' : isLast?'0 4px 4px 0' : '0';
+    seg.style.cssText = `width:${w}px;background:${r.color};min-height:22px;border-radius:${br}`;
+    const lbl = document.createElement('span');
+    lbl.className = 'rope-label';
+    lbl.textContent = r.label;
+    seg.appendChild(lbl);
+    // Strand highlight
+    const shine = document.createElement('div');
+    shine.style.cssText='position:absolute;top:3px;left:6px;right:6px;height:4px;background:rgba(255,255,255,0.25);border-radius:2px;pointer-events:none';
+    seg.appendChild(shine);
+    const del = document.createElement('button');
+    del.className = 'rope-delete';
+    del.innerHTML = '&times;';
+    del.title = 'Remove';
+    del.onclick = (e)=>{e.stopPropagation();removeBench(r.id)};
+    rope.appendChild(seg);
+    rope.appendChild(del);
+    dz.appendChild(rope);
+  });
+
+  updateResult(totalCm);
+}
+
+function updateResult(cm){
+  const rv = document.getElementById('result-value');
+  const rb = document.getElementById('result-breakdown');
+  const cr = document.getElementById('conv-reveal');
+
+  if(benchRopes.length===0){
+    rv.textContent='0 cm';rb.textContent='';cr.classList.remove('show');return;
+  }
+  rv.textContent = fmtCm(cm);
+  if(benchRopes.length>1){
+    rb.textContent = benchRopes.map(r=>r.label).join(' + ');
+  } else {rb.textContent='';}
+
+  // Reveal conversion moment
+  if(cm>=100 && cm%100===0){
+    cr.textContent = `? Look! ${cm} cm = ${cm/100} m exactly. 100 cm make 1 metre!`;
+    cr.classList.add('show');
+  } else if(cm>=100){
+    cr.textContent = `That's ${Math.floor(cm/100)} metre${Math.floor(cm/100)>1?'s':''} and ${cm%100} cm.`;
+    cr.classList.add('show');
+  } else {
+    cr.classList.remove('show');
+  }
+}
+
+// -- TOOLS --
+function toggleTool(t){
+  if(activeTool===t){activeTool=null;}else{activeTool=t;}
+  ['scissors','stretch','compare'].forEach(id=>{
+    const btn = document.getElementById('tool-'+id);
+    const demo = document.getElementById(id+'-demo');
+    const on = activeTool===id;
+    btn.classList.toggle('active',on);
+    demo.classList.toggle('show',on);
+  });
+}
+
+function doCut(){
+  const cm = parseInt(document.getElementById('cut-len').value);
+  const by = parseInt(document.getElementById('cut-by').value);
+  const piece = cm/by;
+  const res = document.getElementById('cut-result');
+  res.innerHTML = '';
+  for(let i=0;i<by;i++){
+    const p = document.createElement('div');
+    p.className='cut-piece';
+    const w = Math.max(50, Math.round(piece/300*160));
+    p.innerHTML=`<div style="height:16px;border-radius:4px;background:var(--orange);width:${w}px;margin:0 auto 6px"></div>${fmtCm(piece)}`;
+    res.appendChild(p);
+  }
+  const eq = document.createElement('div');
+  eq.style.cssText='width:100%;font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:6px';
+  eq.textContent=`${fmtCm(cm)} ? ${by} = ${fmtCm(piece)} each`;
+  res.appendChild(eq);
+}
+
+function doStretch(){
+  const cm = parseInt(document.getElementById('str-len').value);
+  const by = parseInt(document.getElementById('str-by').value);
+  const total = cm*by;
+  const res = document.getElementById('stretch-result');
+  res.innerHTML='';
+  for(let i=0;i<by;i++){
+    if(i>0){const plus=document.createElement('span');plus.className='stretch-plus';plus.textContent='+';res.appendChild(plus);}
+    const w = Math.max(60, Math.round(cm/300*120));
+    const seg=document.createElement('div');
+    seg.className='stretch-seg';
+    seg.style.width=w+'px';
+    seg.textContent=fmtCm(cm);
+    res.appendChild(seg);
+  }
+  const eq=document.createElement('div');
+  eq.style.cssText='width:100%;font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:8px';
+  eq.textContent=`${fmtCm(cm)} ? ${by} = ${fmtCm(total)}`;
+  res.appendChild(eq);
+}
+
+function doCompare(){
+  const a=parseInt(document.getElementById('cmp-a').value);
+  const b=parseInt(document.getElementById('cmp-b').value);
+  const res=document.getElementById('compare-result');
+  const mx=Math.max(a,b);
+  const maxW=300;
+  res.innerHTML=`
+    <div class="compare-bar-row">
+      <div class="compare-label">${fmtCm(a)}</div>
+      <div class="compare-bar" style="width:${Math.round(a/mx*maxW)}px;background:var(--teal)">&nbsp;</div>
+    </div>
+    <div class="compare-bar-row">
+      <div class="compare-label">${fmtCm(b)}</div>
+      <div class="compare-bar" style="width:${Math.round(b/mx*maxW)}px;background:var(--orange)">&nbsp;</div>
+    </div>
+    <div class="diff-marker">Difference: ${fmtCm(Math.abs(a-b))}</div>
+  `;
+}
+
+// -- PRACTICE --
+const QUESTIONS = [
+  {q:'Convert 300 cm to metres.',ans:'3 m',opts:['2 m','3 m','30 m','300 m'],exp:'300 ? 100 = 3 m'},
+  {q:'How many centimetres in 2 m 50 cm?',ans:'250 cm',opts:['205 cm','250 cm','25 cm','2500 cm'],exp:'2?100 + 50 = 250 cm'},
+  {q:'A rope is 1 m 40 cm. Another is 80 cm. Total length?',ans:'2 m 20 cm',opts:['1 m 20 cm','2 m 20 cm','2 m','220 cm'],exp:'140 + 80 = 220 cm = 2 m 20 cm'},
+  {q:'5 m of rope is cut into 4 equal pieces. Each piece is:',ans:'1 m 25 cm',opts:['1 m','1 m 25 cm','125 m','50 cm'],exp:'500 ? 4 = 125 cm = 1 m 25 cm'},
+  {q:'Rope A = 3 m 60 cm. Rope B = 1 m 85 cm. Difference?',ans:'1 m 75 cm',opts:['1 m 25 cm','1 m 75 cm','2 m 75 cm','175 m'],exp:'360 ? 185 = 175 cm = 1 m 75 cm'},
+  {q:'A rope 2 m long is tripled (?3). New length?',ans:'6 m',opts:['5 m','6 m','6 m 30 cm','9 m'],exp:'2 ? 3 = 6 m'},
+  {q:'Convert 475 cm to metres and centimetres.',ans:'4 m 75 cm',opts:['4 m 75 cm','47 m 5 cm','4 m 7 cm','475 m'],exp:'475 ? 100 = 4 m 75 cm'},
+  {q:'A fence is built with 6 planks, each 80 cm. Total length?',ans:'4 m 80 cm',opts:['4 m 8 cm','4 m 80 cm','48 m','5 m 20 cm'],exp:'6 ? 80 = 480 cm = 4 m 80 cm'},
+];
+let qi=0,used=[];
+
+function nextQ(){
+  if(used.length===QUESTIONS.length)used=[];
+  let idx; do{idx=Math.floor(Math.random()*QUESTIONS.length)}while(used.includes(idx)&&used.length<QUESTIONS.length);
+  used.push(idx);qi=idx;
+  const q=QUESTIONS[idx];
+  document.getElementById('pq-text').textContent=q.q;
+  document.getElementById('pq-fb').textContent='';
+  document.getElementById('pq-fb').className='practice-fb';
+  const opts=document.getElementById('pq-opts');
+  opts.innerHTML='';
+  [...q.opts].sort(()=>Math.random()-.5).forEach(o=>{
+    const b=document.createElement('button');
+    b.className='ans-opt';b.textContent=o;
+    b.onclick=()=>{
+      opts.querySelectorAll('.ans-opt').forEach(x=>x.onclick=null);
+      const correct=o===q.ans;
+      b.classList.add(correct?'correct':'wrong');
+      if(!correct)opts.querySelectorAll('.ans-opt').forEach(x=>{if(x.textContent===q.ans)x.classList.add('correct')});
+      const fb=document.getElementById('pq-fb');
+      fb.textContent=correct?'? Correct! '+q.exp:'? Not quite. '+q.exp;
+      fb.className='practice-fb '+(correct?'ok':'no');
+    };
+    opts.appendChild(b);
+  });
+}
+
+// -- TAB SWITCH --
+function switchTab(t){
+  document.querySelectorAll('.tab').forEach(b=>b.classList.toggle('on',b.textContent.toLowerCase().includes(t==='learn'?'work':'prac')));
+  document.getElementById('pnl-learn').classList.toggle('on',t==='learn');
+  document.getElementById('pnl-practice').classList.toggle('on',t==='practice');
+  if(t==='practice')nextQ();
+}
+
+// -- INIT --
+buildPool();
+setupDropZone();
+nextQ();
+</script>
+</body>
+</html>
