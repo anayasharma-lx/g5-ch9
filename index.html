@@ -1,0 +1,100 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Chapter 7 · Subtraction of Greater Numbers</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--burg:#5A1A00;--wood:#8B4513;--gold:#D4A017;--goldl:#F5C518;--cream:#FFF8E8;--red:#C0392B}
+html,body{width:100%;min-height:100vh}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(180deg,#3A0A00 0%,#5A1A00 40%,#8B4513 100%);min-height:100vh;padding:0 0 32px;display:flex;flex-direction:column;align-items:center;}
+.chest-header{width:100%;background:linear-gradient(135deg,#3A0A00,#5A1A00);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid var(--gold);position:relative;}
+.gold-shine{position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--goldl),transparent);animation:shine 2s ease infinite}
+@keyframes shine{0%{opacity:0;transform:translateX(-100%)}50%{opacity:1}100%{opacity:0;transform:translateX(100%)}}
+.ch-title{font-family:'Fredoka One',cursive;font-size:26px;color:var(--goldl);z-index:1;text-shadow:0 0 16px rgba(245,197,24,.4)}
+.ch-chip{background:var(--gold);color:#3A0A00;font-size:12px;font-weight:900;padding:5px 14px;border-radius:20px;z-index:1;border:2px solid rgba(255,255,255,.2)}
+.page{width:100%;max-width:580px;padding:16px;display:flex;flex-direction:column;gap:20px}
+.tcard{background:var(--cream);border-radius:24px;padding:22px;box-shadow:0 6px 0 rgba(0,0,0,.25),0 2px 24px rgba(0,0,0,.2);border:3px solid rgba(255,248,232,.9);position:relative;overflow:hidden}
+.tcard::before{content:'';position:absolute;top:0;left:0;right:0;height:6px;border-radius:24px 24px 0 0;background:var(--gold)}
+.tc-title{font-family:'Fredoka One',cursive;font-size:20px;color:var(--burg);margin-bottom:4px}
+.hint{font-size:13px;font-weight:700;color:var(--wood);margin-bottom:16px;line-height:1.5}
+.col-wrapper{display:flex;justify-content:center;margin-bottom:20px}
+.sum-table{display:grid;grid-template-columns:64px 72px 72px;row-gap:0;align-items:center}
+.cell{width:72px;height:62px;display:flex;align-items:center;justify-content:center;border-radius:10px;font-family:'Fredoka One',cursive;font-size:44px;color:var(--burg)}
+.cell.on{background:#FFE8C0}
+.cell.crossed{color:#C0A080;font-size:36px;text-decoration:line-through}
+.hdr{width:72px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:#AAA;border-radius:8px}
+.hdr.on{color:var(--wood);background:#FFE8C0}
+.bw-wrap{width:72px;height:32px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.bw-old{font-family:'Fredoka One',cursive;font-size:14px;color:#9CA3AF;text-decoration:line-through;line-height:1.1}
+.bw-new{font-family:'Fredoka One',cursive;font-size:20px;color:var(--red);line-height:1.1}
+.op{width:64px;height:62px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:36px;color:var(--red)}
+.ans-cell{width:72px;height:68px;display:flex;align-items:center;justify-content:center;border-radius:14px;border:3px solid #F5DFA0;background:#FFF8E8}
+.ans-cell.on{border-color:var(--gold);background:#FFE8C0}
+.ans-cell.done{border-color:#16A34A;background:#D4F5D4}
+.ans-cell.err{border-color:var(--red);background:#FFE0E0;animation:shake .35s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.ans-input{font-family:'Fredoka One',cursive;font-size:44px;font-weight:400;width:60px;height:60px;border:none;background:transparent;text-align:center;color:var(--burg);outline:none;-moz-appearance:textfield}
+.ans-input::-webkit-outer-spin-button,.ans-input::-webkit-inner-spin-button{-webkit-appearance:none}
+.ans-input:disabled{color:#16A34A}
+.blank-dig{font-family:'Fredoka One',cursive;font-size:38px;color:#DDD}
+.instr{background:linear-gradient(135deg,#FFF8E8,#FFE8C0);border-radius:16px;padding:14px 16px;border:2.5px solid #F5DFA0;margin-bottom:12px;font-size:15px;font-weight:700;color:var(--burg);line-height:1.7}
+.instr strong{color:var(--wood)}.bw{color:var(--red);font-weight:900}
+.fb{min-height:26px;font-family:'Fredoka One',cursive;font-size:17px;text-align:center;margin-bottom:10px}
+.fb.g{color:#16A34A}.fb.b{color:var(--red)}
+.done-box{background:#D4F5D4;border-radius:16px;padding:14px;text-align:center;font-family:'Fredoka One',cursive;font-size:22px;color:#065F46;margin-bottom:12px;display:none}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.go-btn{background:linear-gradient(135deg,var(--gold),var(--wood));color:#fff;border:none;border-radius:14px;padding:12px 26px;font-family:'Fredoka One',cursive;font-size:16px;cursor:pointer;box-shadow:0 4px 0 rgba(0,0,0,.2);transition:all .18s}
+.go-btn:hover{transform:scale(1.06)}
+.new-btn{background:#fff;border:2.5px solid #F5DFA0;color:var(--wood);font-family:'Fredoka One',cursive;font-size:14px;padding:10px 22px;border-radius:14px;cursor:pointer}
+</style></head><body>
+<div class="chest-header"><div class="gold-shine"></div><div class="ch-title">💰 Subtraction of Greater Numbers</div><div class="ch-chip">Chapter 7</div></div>
+<div class="page"><div class="tcard">
+<div class="tc-title">🔢 Type the answer — one column at a time!</div>
+<div class="hint">The gold column is where you work. Read the instruction — sometimes we need to <strong>borrow</strong> from the Tens column! Type the digit, press Check, then move left.</div>
+<div class="col-wrapper"><div class="sum-table" id="sumTable"></div></div>
+<div class="instr" id="instr">Press "New problem" to start!</div>
+<div class="fb" id="fb"></div>
+<div class="done-box" id="doneBox"></div>
+<div class="btn-row">
+  <button class="go-btn" id="goBtn" onclick="check()" style="display:none">Check ✓</button>
+  <button class="new-btn" onclick="newProblem()">New problem ↻</button>
+</div>
+</div></div>
+<script>
+let N1,N2,tensN1,onesN1,tensN2,onesN2,borrowed,tensEff,onesEff,ansT,ansO,step;
+const SOLVE_ORDER=[1,0];
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function generate(){N2=rand(11,79);N1=rand(N2+1,Math.min(N2+40,99));}
+function init(){tensN1=Math.floor(N1/10);onesN1=N1%10;tensN2=Math.floor(N2/10);onesN2=N2%10;borrowed=onesN1<onesN2;onesEff=borrowed?onesN1+10:onesN1;tensEff=borrowed?tensN1-1:tensN1;ansO=onesEff-onesN2;ansT=tensEff-tensN2;step=0;}
+function solvedSet(){return new Set(SOLVE_ORDER.slice(0,step));}
+function draw(){
+  const solved=solvedSet();const cur=SOLVE_ORDER[step];const tbl=document.getElementById('sumTable');let html='';
+  html+=`<div></div><div class="hdr${cur===0?' on':''}">T</div><div class="hdr${cur===1?' on':''}">O</div>`;
+  html+=`<div></div><div class="bw-wrap"></div>`;
+  if(borrowed&&(cur===1||solved.has(1)))html+=`<div class="bw-wrap"><span class="bw-new">${onesEff}</span></div>`;else html+=`<div class="bw-wrap"></div>`;
+  const tensCrossed=borrowed&&solved.has(1);
+  html+=`<div></div><div class="cell${cur===0?' on':''}${tensCrossed?' crossed':''}">${tensN1}</div>`;
+  const onesCrossed=borrowed&&(cur===1||solved.has(1));
+  html+=`<div class="cell${cur===1?' on':''}${onesCrossed?' crossed':''}">${onesN1}</div>`;
+  html+=`<div class="op">−</div><div class="cell${cur===0?' on':''}">${tensN2}</div><div class="cell${cur===1?' on':''}">${onesN2}</div>`;
+  html+=`<div></div><div style="grid-column:2/4;border-top:3px solid var(--burg);margin:4px 0"></div><div style="display:none"></div>`;
+  html+=`<div></div>`;
+  if(solved.has(0))html+=`<div class="ans-cell done"><input class="ans-input" value="${ansT}" disabled></div>`;else if(cur===0)html+=`<div class="ans-cell on" id="curCell"><input class="ans-input" id="curIn" type="number" min="0" max="9" placeholder="?" autocomplete="off"></div>`;else html+=`<div class="ans-cell"><span class="blank-dig">_</span></div>`;
+  if(solved.has(1))html+=`<div class="ans-cell done"><input class="ans-input" value="${ansO}" disabled></div>`;else if(cur===1)html+=`<div class="ans-cell on" id="curCell"><input class="ans-input" id="curIn" type="number" min="0" max="9" placeholder="?" autocomplete="off"></div>`;else html+=`<div class="ans-cell"><span class="blank-dig">_</span></div>`;
+  tbl.innerHTML=html;
+  const inp=document.getElementById('curIn');if(inp){inp.oninput=()=>{if(inp.value.length>1)inp.value=inp.value.slice(-1);};inp.onkeydown=e=>{if(e.key==='Enter')check();};inp.focus();}
+}
+function buildInstr(){
+  const cur=SOLVE_ORDER[step];let html;
+  if(cur===1){if(borrowed){html=`<strong>O column</strong> (gold): The top digit (${onesN1}) is smaller, so we <span class="bw">borrow 10</span> from Tens.<br>The top digit becomes <strong>${onesEff}</strong>. ${onesEff} − ${onesN2} = <strong>${ansO}</strong>. Write <strong>${ansO}</strong>.`;}else{html=`<strong>O column</strong> (gold): ${onesN1} − ${onesN2} = <strong>${ansO}</strong>. Write <strong>${ansO}</strong>.`;}}
+  else{if(borrowed){html=`<strong>T column</strong> (gold): We borrowed 1, so the top digit is now ${tensEff}.<br>${tensEff} − ${tensN2} = <strong>${ansT}</strong>. Write <strong>${ansT}</strong>.`;}else{html=`<strong>T column</strong> (gold): ${tensN1} − ${tensN2} = <strong>${ansT}</strong>. Write <strong>${ansT}</strong>.`;}}
+  document.getElementById('instr').innerHTML=html;
+}
+function check(){
+  const cur=SOLVE_ORDER[step];const correct=cur===1?ansO:ansT;const inp=document.getElementById('curIn');if(!inp)return;const v=parseInt(inp.value);const fb=document.getElementById('fb');
+  if(isNaN(v)){fb.textContent='Type a digit 0–9!';fb.className='fb b';return;}
+  if(v===correct){fb.textContent='✓ Correct! ⭐';fb.className='fb g';document.getElementById('curCell').classList.replace('on','done');step++;setTimeout(()=>{fb.textContent='';if(step>=SOLVE_ORDER.length)done();else{draw();buildInstr();}},600);}
+  else{fb.textContent='Not right — re-read the instruction!';fb.className='fb b';const cell=document.getElementById('curCell');cell.classList.add('err');inp.value='';inp.focus();setTimeout(()=>cell.classList.remove('err'),500);}
+}
+function done(){draw();document.getElementById('doneBox').style.display='block';document.getElementById('doneBox').textContent=`🎉 ${N1} − ${N2} = ${N1-N2}! Brilliant! 💰`;document.getElementById('instr').style.opacity='.35';document.getElementById('goBtn').style.display='none';document.getElementById('fb').textContent='';}
+function newProblem(){generate();init();document.getElementById('doneBox').style.display='none';document.getElementById('instr').style.opacity='1';document.getElementById('goBtn').style.display='inline-block';document.getElementById('fb').textContent='';document.getElementById('fb').className='fb';draw();buildInstr();}
+newProblem();
+</script></body></html>
