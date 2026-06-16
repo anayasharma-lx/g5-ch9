@@ -3,269 +3,244 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Chapter 9 · Measuring Length</title>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;700;800&family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<title>Ch 9 · Grade 5 · Measuring Length — Grade 5</title>
+<link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@400;700;800;900&family=DM+Sans:opsz,wght@9..40,400;9..40,700;9..40,800&family=DM+Mono:wght@500;700&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bench:#7A5A14;--bench2:#5A3E0A;--bench-hi:#C8A045;--bench-light:#E8C870;
-  --teal:#0E7C7B;--teal2:#0A5C5B;--teal-light:#B8EEEE;
-  --orange:#D4621A;--orange2:#A84D15;--orange-light:#FDDDC4;
-  --paper:#FBF5E8;--paper2:#F2E8CF;--paper3:#E8D9B5;
-  --ink:#1A1208;--ink2:#4A3A1A;--ink3:#8A7050;
-  --rule:#C8B890;--red:#DC2626;--ok:#16A34A;
-  --sans:'Syne',sans-serif;--serif:'Instrument Serif',serif;--mono:'Space Mono',monospace;
+  --bg1:#fddcb5;--bg2:#dff2e0;--card:#fff;--border:#1a1a2e;
+  --ink:#1a1a2e;--ink2:#4a4a5a;--ink3:#9090a0;
+  --teal:#4ecdc4;--orange:#ff6b35;--yellow:#ffd93d;
+  --red:#e63946;--purple:#a78bfa;--green:#2a9d8f;
+  --ok:#16a34a;--no:#dc2626;
+  --sans:'DM Sans',system-ui,sans-serif;
+  --fun:'Grandstander',cursive;
+  --mono:'DM Mono',monospace;
 }
-html,body{width:100%;min-height:100vh;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
-.header{background:var(--bench);padding:0 24px;display:flex;align-items:center;gap:16px;height:56px;border-bottom:3px solid var(--bench2);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,0.3)}
-.header-title{font-family:var(--serif);font-size:21px;color:#FFF8E8;font-style:italic}
-.header-sub{font-family:var(--mono);font-size:10px;color:rgba(255,248,232,0.5);letter-spacing:1.5px;text-transform:uppercase}
-.header-tabs{margin-left:auto;display:flex;background:rgba(0,0,0,0.22);border-radius:8px;padding:3px;gap:2px}
-.tab{padding:7px 16px;font-family:var(--mono);font-size:11px;color:rgba(255,248,232,0.5);cursor:pointer;border-radius:6px;transition:.2s;border:none;background:none}
-.tab.on{background:var(--paper);color:var(--ink);font-weight:700}
-.tab:hover:not(.on){color:rgba(255,248,232,0.85)}
-.main{max-width:900px;margin:0 auto;padding:22px 16px 60px}
+html{background:linear-gradient(135deg,#fddcb5 0%,#fef6e8 50%,#dff2e0 100%);min-height:100vh}
+body{font-family:var(--sans);color:var(--ink);padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.shape{position:fixed;pointer-events:none;z-index:-1}
+.sh-c{width:52px;height:52px;border-radius:50%;background:#ff6b6b;opacity:.6;top:70px;left:calc(50% - 520px)}
+.sh-t{width:0;height:0;border-left:20px solid transparent;border-right:20px solid transparent;border-bottom:35px solid #4ecdc4;opacity:.6;bottom:160px;right:calc(50% - 520px)}
+.sh-s{font-size:32px;opacity:.5;top:180px;right:calc(50% - 500px)}
+.sh-sq{width:34px;height:34px;border-radius:7px;background:#a78bfa;opacity:.5;bottom:80px;left:calc(50% - 500px);transform:rotate(15deg)}
+.page-card{background:var(--card);border:2px solid var(--border);border-radius:22px;width:100%;max-width:960px;overflow:hidden}
+.card-header{padding:22px 28px 18px}
+.activity-pill{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);border:2px solid var(--border);border-radius:30px;padding:4px 14px;font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px}
+.activity-pill::before{content:'★';font-size:10px}
+.page-title{font-family:var(--fun);font-size:clamp(20px,3.5vw,34px);font-weight:900;line-height:1.1;margin-bottom:8px;flex-wrap:wrap}
+.t-pill{color:#fff;border:2px solid var(--border);border-radius:12px;padding:2px 14px;font-style:italic}
+.page-desc{font-size:14px;color:var(--ink2);line-height:1.6}
+.tab-row{display:flex;gap:8px;padding:10px 20px;border-top:1px dashed #d0d0d8;border-bottom:1px dashed #d0d0d8;background:#fafafa;flex-wrap:wrap}
+.tab-btn{padding:8px 20px;border:2px solid #d0d0d8;border-radius:30px;background:#fff;font-family:var(--fun);font-size:13px;font-weight:800;color:var(--ink2);cursor:pointer;transition:all .14s}
+.tab-btn.on{background:var(--teal);color:#fff;border-color:var(--teal)}
+.tab-btn:hover:not(.on){border-color:var(--teal);color:var(--teal)}
 .pnl{display:none}.pnl.on{display:block}
-.concept{background:var(--bench2);border-radius:12px;padding:16px 20px;margin-bottom:18px;display:flex;gap:14px;align-items:flex-start}
-.concept-icon{font-size:30px;flex-shrink:0;line-height:1.1}
-.concept-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light);opacity:.7;margin-bottom:4px}
-.concept-text{font-family:var(--serif);font-style:italic;font-size:14px;color:#FFF0CC;line-height:1.7}
-.concept-text strong{font-style:normal;color:var(--bench-light)}
-.panel{background:var(--paper);border:2px solid var(--rule);border-radius:12px;overflow:hidden;margin-bottom:16px;box-shadow:0 2px 10px rgba(0,0,0,0.08)}
-.panel-head{background:var(--bench2);padding:10px 16px;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light);display:flex;align-items:center;gap:8px}
-.panel-body{padding:14px 16px}
-/* rope store */
-.rope-store{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
-.rope-card{background:var(--paper2);border:2px solid var(--rule);border-radius:10px;padding:10px 12px;cursor:pointer;transition:.18s;display:flex;flex-direction:column;gap:6px;user-select:none}
-.rope-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:0 4px 14px rgba(0,0,0,0.15)}
-.rope-card.added{border-color:var(--teal);background:var(--teal-light)}
-.rope-vis{height:14px;border-radius:7px;position:relative;overflow:hidden}
-.rope-vis::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,rgba(0,0,0,0.08) 0,rgba(0,0,0,0.08) 4px,transparent 4px,transparent 8px)}
-.rope-vis::after{content:'';position:absolute;top:3px;left:8px;right:8px;height:4px;background:rgba(255,255,255,0.35);border-radius:2px}
-.rope-card-label{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink2)}
-.rope-card-sub{font-family:var(--sans);font-size:11px;color:var(--ink3)}
-/* bench */
-.bench-wrap{background:var(--bench);border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,0.28);border:3px solid var(--bench2);margin-bottom:14px;position:relative}
-.bench-top{background:var(--bench2);padding:8px 16px;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light);display:flex;align-items:center;justify-content:space-between}
-#bench-canvas{display:block;width:100%;height:auto}
-.total-readout{background:var(--paper);border:2px solid var(--rule);border-radius:10px;padding:12px 16px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
-.total-lbl{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ink3);margin-bottom:2px}
-.total-val{font-family:var(--mono);font-size:32px;font-weight:700;color:var(--teal);line-height:1}
-.total-formula{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:2px}
-.conversion-tag{background:var(--teal-light);border:2px solid var(--teal);border-radius:8px;padding:8px 12px;font-family:var(--serif);font-style:italic;font-size:13px;color:var(--teal2);display:none}
-.conversion-tag.show{display:block;animation:popIn .3s ease}
-@keyframes popIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}
-.clear-btn{padding:6px 12px;background:transparent;border:1.5px solid rgba(255,200,100,0.4);border-radius:6px;font-family:var(--mono);font-size:10px;font-weight:700;cursor:pointer;color:var(--bench-light);transition:.15s}
-.clear-btn:hover{background:rgba(220,38,38,0.2);border-color:#DC2626;color:#fca5a5}
-/* tools */
-.tool-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
-.tool-tab{padding:7px 12px;background:var(--paper2);border:2px solid var(--rule);border-radius:8px;font-family:var(--mono);font-size:10px;font-weight:700;cursor:pointer;color:var(--ink2);transition:.18s}
-.tool-tab.on{background:var(--orange-light);border-color:var(--orange);color:var(--orange2)}
-.tool-pane{display:none}.tool-pane.on{display:block;animation:popIn .25s ease}
-.tool-card{background:var(--paper2);border:2px solid var(--rule);border-radius:10px;padding:14px}
-.tool-label{font-family:var(--mono);font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
-.tool-select-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px}
-.tool-select-row label{font-family:var(--mono);font-size:11px;color:var(--ink3)}
-.tool-select{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink);background:var(--paper);border:2px solid var(--rule);border-radius:6px;padding:5px 8px}
-.tool-do-btn{padding:8px 16px;background:var(--orange);color:#fff;border:none;border-radius:7px;font-family:var(--mono);font-size:11px;font-weight:700;cursor:pointer;transition:.15s;white-space:nowrap}
-.tool-do-btn:hover{background:var(--orange2)}
-.tr-bars{display:flex;gap:4px;flex-wrap:wrap;align-items:center;margin-bottom:8px}
-.tr-bar{height:22px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;font-weight:700;color:#fff;min-width:36px;flex-shrink:0}
-.tr-plus{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink3)}
-.tr-eq{font-family:var(--mono);font-size:11px;color:var(--ink3);margin-top:4px}
-.cmp-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
-.cmp-lbl{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--ink2);min-width:80px}
-.cmp-bar{height:20px;border-radius:4px;min-width:8px;transition:width .5s cubic-bezier(.36,1.3,.6,1)}
-.cmp-len{font-family:var(--mono);font-size:10px;font-weight:700;color:var(--ink3);margin-left:4px}
-.diff-pill{background:var(--orange-light);border:2px solid var(--orange);border-radius:7px;padding:6px 12px;font-family:var(--mono);font-size:12px;font-weight:700;color:var(--orange2);display:inline-block;margin-top:6px}
-.facts-card{background:var(--bench2);border-radius:12px;padding:16px;margin-bottom:14px}
-.facts-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light);opacity:.7;margin-bottom:10px}
-.fact-row{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.07)}
-.fact-row:last-child{border-bottom:none;padding-bottom:0}
-.fact-icon{font-size:18px;width:26px;text-align:center;flex-shrink:0}
-.fact-text{font-family:var(--sans);font-size:13px;color:rgba(255,240,200,0.75);line-height:1.4}
-.fact-text strong{font-family:var(--mono);font-size:12px;color:var(--bench-light)}
-.workshop-grid{display:grid;grid-template-columns:1fr 300px;gap:18px;align-items:start}
+.sec-lbl{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:8px}
+.step-btn{padding:8px 18px;border:2px solid var(--border);border-radius:20px;background:#fff;font-family:var(--fun);font-size:13px;font-weight:800;color:var(--ink2);cursor:pointer;transition:all .12s}
+.step-btn:hover{background:#f5f5f5}
+.step-btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}
+.insight-strip{padding:12px 20px;background:#fffbe6;border-top:1px dashed #d0d0d8;font-size:13px;color:var(--ink2);line-height:1.6}
+.ch-card{padding:14px 18px;background:#f8f8f8;border-radius:14px;border:1.5px solid #e0e0e0}
+.ch-tag{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;color:var(--ink3);margin-bottom:6px}
+.ch-q{font-family:var(--fun);font-size:15px;font-weight:800;color:var(--ink);margin-bottom:10px;line-height:1.4}
+.ch-opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px}
+.ch-opt{padding:8px 18px;border:2px solid #d0d0d8;border-radius:20px;background:#fff;font-family:var(--fun);font-size:14px;font-weight:800;cursor:pointer;transition:all .12s}
+.ch-opt:hover{border-color:var(--teal);color:var(--teal)}
+.ch-opt.correct{background:var(--ok);color:#fff;border-color:var(--ok)}
+.ch-opt.wrong{background:var(--no);color:#fff;border-color:var(--no)}
+.ch-fb{font-size:13px;font-weight:700;min-height:18px;padding:6px 0}
+.ch-fb.ok{color:var(--ok)}.ch-fb.no{color:var(--no)}
+.score-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.score-pill{display:inline-flex;align-items:center;gap:4px;background:#f3eeff;border:1.5px solid var(--purple);border-radius:20px;padding:5px 14px;font-family:var(--mono);font-size:14px;font-weight:700;color:var(--purple)}
+@media(max-width:640px){body{padding:10px 8px}}
 
-/* ── PRACTICE: interactive conversion machine ── */
-.prac-layout{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:start}
-.machine-card{background:var(--paper);border:2px solid var(--rule);border-radius:12px;overflow:hidden}
-.machine-head{background:var(--bench2);padding:10px 16px;font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light)}
-.machine-body{padding:16px}
-.machine-display{background:var(--bench);border-radius:10px;padding:20px;text-align:center;margin-bottom:14px}
-.machine-from{font-family:var(--mono);font-size:36px;font-weight:700;color:var(--bench-light);line-height:1}
-.machine-arrow{font-size:28px;margin:6px 0;opacity:.6}
-.machine-to-label{font-family:var(--mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,248,232,0.4);margin-bottom:6px}
-.unit-row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
-.unit-btn{padding:8px 16px;background:var(--paper2);border:2px solid var(--rule);border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;color:var(--ink2);transition:.18s}
-.unit-btn:hover{border-color:var(--orange);color:var(--orange2)}
-.unit-btn.on{background:var(--orange-light);border-color:var(--orange);color:var(--orange2)}
-.unit-btn.correct-lock{background:#DCFCE7;border-color:var(--ok);color:#14532D;cursor:default;animation:popIn .3s}
-.unit-btn.wrong-shake{animation:shk .4s}
-@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
-.answer-reveal{background:#DCFCE7;border:2px solid var(--ok);border-radius:10px;padding:14px;text-align:center;font-family:var(--serif);font-style:italic;font-size:16px;color:#14532D;line-height:1.6;display:none}
-.answer-reveal.show{display:block;animation:popIn .3s}
-.next-q-btn{width:100%;margin-top:10px;padding:10px;background:var(--bench);color:var(--bench-light);border:none;border-radius:8px;font-family:var(--mono);font-size:12px;font-weight:700;cursor:pointer;transition:.15s}
-.next-q-btn:hover{background:var(--bench2)}
-.score-panel{background:var(--bench2);border-radius:12px;padding:18px}
-.sc-title{font-family:var(--mono);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--bench-light);opacity:.7;margin-bottom:10px}
-.sc-big{font-family:var(--mono);font-size:48px;font-weight:700;color:var(--bench-light);line-height:1;margin-bottom:4px}
-.sc-sub{font-family:var(--sans);font-size:12px;color:rgba(255,240,200,0.45);margin-bottom:14px}
-.sc-bar-wrap{background:rgba(255,255,255,0.1);border-radius:6px;height:8px;overflow:hidden;margin-bottom:14px}
-.sc-bar{height:100%;background:linear-gradient(90deg,var(--teal),var(--bench-light));border-radius:6px;width:0%;transition:width .4s ease}
-.fact-box{background:rgba(255,255,255,0.06);border-radius:8px;padding:12px;margin-top:12px;font-family:var(--serif);font-style:italic;font-size:13px;color:rgba(255,240,200,0.65);line-height:1.6}
 
-@media(max-width:700px){
-  .workshop-grid{grid-template-columns:1fr}
-  .prac-layout{grid-template-columns:1fr}
-  .header{height:auto;padding:10px 16px;flex-wrap:wrap;gap:8px}
-  .header-tabs{width:100%;justify-content:center}
-}
+/* CH9 ROPE WORKSHOP */
+.workshop-layout{display:grid;grid-template-columns:1fr 320px;border-top:1px dashed #d0d0d8}
+.shop-col{padding:16px 18px;border-right:1px dashed #d0d0d8;display:flex;flex-direction:column;gap:12px}
+.bench-col{padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.rope-store{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.rope-card{background:#fff;border:2px solid #e0e0e0;border-radius:14px;padding:10px 12px;cursor:pointer;transition:all .14s;display:flex;flex-direction:column;gap:6px}
+.rope-card:hover{border-color:var(--teal);transform:translateY(-2px)}
+.rope-card.added{border-color:var(--ok);background:#f0fdf4}
+.rope-vis{height:18px;border-radius:5px;min-width:20%;transition:width .3s;position:relative;overflow:hidden}
+.rope-vis::after{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 5px,rgba(0,0,0,0.12) 5px,rgba(0,0,0,0.12) 6px)}
+.rope-card-label{font-family:var(--fun);font-size:13px;font-weight:800;color:var(--ink)}
+.rope-card-sub{font-family:var(--mono);font-size:11px;color:var(--ink3)}
+/* bench canvas area */
+.bench-wrap{background:#f4f8ff;border-radius:12px;overflow:hidden;border:1.5px solid #e0e0e0}
+#bench-canvas{display:block;width:100%}
+/* total display */
+.total-disp{padding:10px 14px;background:#e8faf9;border-radius:12px;border:2px solid var(--teal)}
+.total-val{font-family:var(--mono);font-size:24px;font-weight:700;color:var(--teal)}
+.total-formula{font-size:12px;color:var(--ink3);font-family:var(--mono);margin-top:2px}
+.conv-tag{display:none;padding:8px 12px;background:var(--yellow);border-radius:10px;border:2px solid var(--border);font-family:var(--fun);font-size:13px;font-weight:800;color:var(--ink)}
+.conv-tag.show{display:block}
+/* TOOLS */
+.tool-tabs{display:flex;gap:6px;margin-bottom:10px}
+.tool-tab{padding:6px 14px;border:2px solid #d0d0d8;border-radius:20px;background:#fff;font-family:var(--fun);font-size:12px;font-weight:800;color:var(--ink3);cursor:pointer}
+.tool-tab.on{background:var(--orange);color:#fff;border-color:var(--orange)}
+.tool-pane{display:none}.tool-pane.on{display:flex;flex-direction:column;gap:8px}
+.ctrl-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ctrl-row label{font-size:12px;font-weight:700;color:var(--ink3)}
+.ctrl-row select{padding:6px 10px;border:2px solid #d0d0d8;border-radius:10px;font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);background:#fff}
+.go-btn{padding:8px 18px;background:var(--orange);color:#fff;border:2px solid var(--border);border-radius:20px;font-family:var(--fun);font-size:13px;font-weight:800;cursor:pointer}
+/* cut result rope-style bars */
+.tr-bars{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.tr-bar{height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:10px;color:#fff;font-weight:700;flex-shrink:0;overflow:hidden;position:relative}
+.tr-plus{font-size:16px;font-weight:900;color:var(--ink3)}
+.tr-eq{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--ink);margin-top:6px}
+/* compare bars */
+.cmp-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.cmp-lbl{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink2);min-width:80px}
+.cmp-bar{height:24px;border-radius:5px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-family:var(--mono);font-size:11px;color:#fff;font-weight:700;transition:width .4s}
+.cmp-len{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--ink3);margin-left:6px}
+.diff-pill{display:inline-flex;padding:5px 12px;background:#f3eeff;border-radius:20px;border:1.5px solid var(--purple);font-family:var(--fun);font-size:13px;font-weight:800;color:var(--purple);margin-top:8px}
+/* PRACTICE */
+.conv-machine{padding:16px 20px;display:flex;flex-direction:column;gap:14px}
+.machine-card{padding:16px;background:#f8f8f8;border-radius:14px;border:1.5px solid #e0e0e0}
+.from-val{font-family:var(--mono);font-size:32px;font-weight:700;color:var(--teal);margin-bottom:6px}
+.to-label{font-size:13px;font-weight:700;color:var(--ink3);margin-bottom:10px}
+.unit-btn{padding:8px 18px;border:2px solid #d0d0d8;border-radius:20px;background:#fff;font-family:var(--mono);font-size:14px;font-weight:700;cursor:pointer;transition:all .12s}
+.unit-btn:hover{border-color:var(--teal)}
+.unit-btn.correct-lock{background:var(--ok);color:#fff;border-color:var(--ok)}
+.unit-btn.wrong-shake{background:var(--no);color:#fff;border-color:var(--no);animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.m-reveal{display:none;padding:10px 12px;border-radius:10px;border:1.5px solid;font-size:13px;font-weight:700;line-height:1.5}
+.m-reveal.show{display:block}
+.sc-bar-wrap{height:8px;background:#e0e0e0;border-radius:4px;overflow:hidden;margin-top:6px}
+.sc-bar{height:100%;background:var(--teal);border-radius:4px;transition:width .4s}
+.fact-box{font-size:12px;color:var(--ink3);padding:8px 12px;background:#f0f0f0;border-radius:8px;margin-top:4px;font-family:var(--mono)}
+@media(max-width:680px){.workshop-layout{grid-template-columns:1fr}.shop-col{border-right:none;border-bottom:1px dashed #d0d0d8}.rope-store{grid-template-columns:repeat(2,1fr)}}
+
 </style>
 </head>
 <body>
-<div class="header">
-  <div>
-    <div class="header-title">Rope &amp; Measurement Workshop</div>
-    <div class="header-sub">Chapter 9 · Measuring Length</div>
+<div class="shape sh-c"></div><div class="shape sh-t"></div>
+<div class="shape sh-s">★</div><div class="shape sh-sq"></div>
+<div class="page-card">
+  <div class="card-header">
+    <div class="activity-pill">Ch 9 · Grade 5 · Measuring Length</div>
+    <div class="page-title">📏 Rope &amp; Measurement <span class="t-pill" style="background:var(--teal)">Workshop</span></div>
+    <p class="page-desc">Drag ropes onto the bench to add lengths. Use the tools to cut, repeat and compare. Master metres and centimetres!</p>
   </div>
-  <div class="header-tabs">
-    <button class="tab on" onclick="switchTab('learn')">Workshop</button>
-    <button class="tab" onclick="switchTab('practice')">Practice</button>
-  </div>
-</div>
-<div class="main">
 
-<!-- WORKSHOP TAB -->
-<div class="pnl on" id="pnl-learn">
-  <div class="concept">
-    <div class="concept-icon">📏</div>
-    <div>
-      <div class="concept-title">What you'll discover</div>
-      <div class="concept-text">Tap any rope to add it to the workbench. When you reach <strong>100 cm</strong>, it converts to <strong>1 m</strong> automatically. Use the tools to cut, repeat, or compare ropes.</div>
-    </div>
+  <div class="tab-row">
+    <button class="tab-btn on" onclick="switchTab('learn')">🪢 Workshop</button>
+    <button class="tab-btn" onclick="switchTab('practice')">🔄 Conversion Machine</button>
   </div>
-  <div class="workshop-grid">
-    <div>
-      <div class="panel">
-        <div class="panel-head">🪢 Rope store — tap to add</div>
-        <div class="panel-body"><div class="rope-store" id="rope-store"></div></div>
+
+  <!-- WORKSHOP -->
+  <div class="pnl on" id="pnl-learn">
+    <div class="workshop-layout">
+      <div class="shop-col">
+        <div class="sec-lbl">🪢 Rope shop — tap to add to bench</div>
+        <div class="rope-store" id="rope-store"></div>
+        <button class="step-btn" onclick="clearBench()">🗑 Clear bench</button>
       </div>
-      <div class="bench-wrap">
-        <div class="bench-top"><span>🔨 Workbench</span><button class="clear-btn" onclick="clearBench()">✕ Clear</button></div>
-        <canvas id="bench-canvas" width="600" height="140"></canvas>
-      </div>
-      <div class="total-readout">
-        <div>
-          <div class="total-lbl">Total length</div>
+      <div class="bench-col">
+        <div class="sec-lbl">📏 Measurement bench</div>
+        <div class="bench-wrap">
+          <canvas id="bench-canvas"></canvas>
+        </div>
+        <div class="total-disp">
           <div class="total-val" id="total-val">0 cm</div>
           <div class="total-formula" id="total-formula"></div>
         </div>
-        <div class="conversion-tag" id="conv-tag"></div>
+        <div class="conv-tag" id="conv-tag"></div>
       </div>
     </div>
-    <div>
-      <div class="panel">
-        <div class="panel-head">🛠️ Tools</div>
-        <div class="panel-body">
-          <div class="tool-tabs">
-            <button class="tool-tab on" onclick="setTool('cut')">✂️ Cut</button>
-            <button class="tool-tab" onclick="setTool('repeat')">× Repeat</button>
-            <button class="tool-tab" onclick="setTool('compare')">⚖️ Compare</button>
-          </div>
-          <div class="tool-pane on" id="tp-cut">
-            <div class="tool-card">
-              <div class="tool-label">Cut into equal pieces</div>
-              <div class="tool-select-row">
-                <label>Rope</label>
-                <select class="tool-select" id="cut-rope"><option value="100">1 m</option><option value="150">1 m 50 cm</option><option value="200">2 m</option><option value="240">2 m 40 cm</option><option value="300">3 m</option><option value="500">5 m</option></select>
-                <label>÷</label>
-                <select class="tool-select" id="cut-by"><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-                <button class="tool-do-btn" onclick="doCut()">Cut!</button>
-              </div>
-              <div class="tool-result" id="cut-result"></div>
-            </div>
-          </div>
-          <div class="tool-pane" id="tp-repeat">
-            <div class="tool-card">
-              <div class="tool-label">Lay same rope end-to-end</div>
-              <div class="tool-select-row">
-                <label>Rope</label>
-                <select class="tool-select" id="rep-rope"><option value="50">50 cm</option><option value="75">75 cm</option><option value="100">1 m</option><option value="120">1 m 20 cm</option><option value="150">1 m 50 cm</option><option value="200">2 m</option></select>
-                <label>×</label>
-                <select class="tool-select" id="rep-by"><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select>
-                <button class="tool-do-btn" onclick="doRepeat()">Repeat!</button>
-              </div>
-              <div class="tool-result" id="rep-result"></div>
-            </div>
-          </div>
-          <div class="tool-pane" id="tp-compare">
-            <div class="tool-card">
-              <div class="tool-label">Compare two lengths</div>
-              <div class="tool-select-row">
-                <label>A</label>
-                <select class="tool-select" id="cmp-a"><option value="75">75 cm</option><option value="100">1 m</option><option value="120">1 m 20 cm</option><option value="150">1 m 50 cm</option><option value="200" selected>2 m</option><option value="240">2 m 40 cm</option><option value="300">3 m</option></select>
-                <label>vs</label>
-                <select class="tool-select" id="cmp-b"><option value="75">75 cm</option><option value="100">1 m</option><option value="120">1 m 20 cm</option><option value="150" selected>1 m 50 cm</option><option value="180">1 m 80 cm</option><option value="250">2 m 50 cm</option><option value="300">3 m</option></select>
-                <button class="tool-do-btn" onclick="doCompare()">Compare!</button>
-              </div>
-              <div class="tool-result" id="cmp-result"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="facts-card">
-        <div class="facts-title">Key facts</div>
-        <div class="fact-row"><div class="fact-icon">📏</div><div class="fact-text"><strong>100 cm</strong> = 1 metre (m)</div></div>
-        <div class="fact-row"><div class="fact-icon">🔢</div><div class="fact-text">cm → m: <strong>divide by 100</strong></div></div>
-        <div class="fact-row"><div class="fact-icon">🔢</div><div class="fact-text">m → cm: <strong>multiply by 100</strong></div></div>
-        <div class="fact-row"><div class="fact-icon">➕</div><div class="fact-text">Join ropes → <strong>add</strong></div></div>
-        <div class="fact-row"><div class="fact-icon">✂️</div><div class="fact-text">Cut equal pieces → <strong>divide</strong></div></div>
-        <div class="fact-row"><div class="fact-icon">🔁</div><div class="fact-text">Repeat rope → <strong>multiply</strong></div></div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!-- PRACTICE TAB: interactive conversion machine -->
-<div class="pnl" id="pnl-practice">
-  <div class="concept">
-    <div class="concept-icon">⚙️</div>
-    <div>
-      <div class="concept-title">Conversion Machine</div>
-      <div class="concept-text">A length pops into the machine. <strong>Choose the correct converted value</strong> on the other side — tap the right answer among the options!</div>
-    </div>
-  </div>
-  <div class="prac-layout">
-    <div class="machine-card">
-      <div class="machine-head">Conversion Machine</div>
-      <div class="machine-body">
-        <div class="machine-display">
-          <div class="machine-from" id="m-from">3 m</div>
-          <div class="machine-arrow">↓ ⚙️ ↓</div>
-          <div class="machine-to-label">= ? in <span id="m-to-unit">cm</span></div>
+    <!-- TOOLS -->
+    <div style="padding:14px 18px;border-top:1px dashed #d0d0d8">
+      <div class="tool-tabs">
+        <button class="tool-tab on" onclick="setTool('cut')">✂️ Cut</button>
+        <button class="tool-tab" onclick="setTool('repeat')">🔁 Repeat</button>
+        <button class="tool-tab" onclick="setTool('compare')">📊 Compare</button>
+      </div>
+      <!-- CUT PANE -->
+      <div class="tool-pane on" id="tp-cut">
+        <div class="ctrl-row">
+          <label>Rope</label>
+          <select id="cut-rope">
+            <option value="100">1 m (100 cm)</option><option value="150">1 m 50 cm</option>
+            <option value="200">2 m</option><option value="240">2 m 40 cm</option>
+            <option value="300">3 m</option><option value="50">50 cm</option>
+          </select>
+          <label>÷ pieces</label>
+          <select id="cut-by">
+            <option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option>
+          </select>
+          <button class="go-btn" onclick="doCut()">✂️ Cut!</button>
         </div>
-        <div style="font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;text-align:center">Tap the correct answer</div>
-        <div class="unit-row" id="m-opts"></div>
-        <div class="answer-reveal" id="m-reveal"></div>
-        <button class="next-q-btn" id="m-next" onclick="nextMachineQ()" style="display:none">Next question →</button>
+        <div id="cut-result"></div>
       </div>
-    </div>
-    <div>
-      <div class="score-panel">
-        <div class="sc-title">Your score</div>
-        <div class="sc-big" id="sc-correct">0</div>
-        <div class="sc-sub">correct answers</div>
-        <div class="sc-bar-wrap"><div class="sc-bar" id="sc-bar"></div></div>
-        <div style="font-family:var(--mono);font-size:11px;color:rgba(255,240,200,0.45)" id="sc-total">0 answered</div>
-        <div class="fact-box" id="fact-box">Convert m → cm: multiply by 100. So 1 m = 100 cm!</div>
+      <!-- REPEAT PANE -->
+      <div class="tool-pane" id="tp-repeat">
+        <div class="ctrl-row">
+          <label>Rope</label>
+          <select id="rep-rope">
+            <option value="50">50 cm</option><option value="75">75 cm</option>
+            <option value="100">1 m</option><option value="120">1 m 20 cm</option>
+          </select>
+          <label>× times</label>
+          <select id="rep-by">
+            <option value="2">2</option><option value="3">3</option>
+            <option value="4">4</option><option value="5">5</option>
+          </select>
+          <button class="go-btn" onclick="doRepeat()">🔁 Repeat!</button>
+        </div>
+        <div id="rep-result"></div>
+      </div>
+      <!-- COMPARE PANE -->
+      <div class="tool-pane" id="tp-compare">
+        <div class="ctrl-row">
+          <label>Rope A (cm)</label>
+          <select id="cmp-a">
+            <option value="100">100 cm</option><option value="150">150 cm</option>
+            <option value="75">75 cm</option><option value="200">200 cm</option>
+          </select>
+          <label>vs Rope B</label>
+          <select id="cmp-b">
+            <option value="75">75 cm</option><option value="200">200 cm</option>
+            <option value="100">100 cm</option><option value="125">125 cm</option>
+          </select>
+          <button class="go-btn" onclick="doCompare()">📊 Compare!</button>
+        </div>
+        <div id="cmp-result"></div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- PRACTICE -->
+  <div class="pnl" id="pnl-practice" style="display:none">
+    <div class="conv-machine">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div class="score-pill">✓ <span id="sc-correct">0</span> correct &nbsp;·&nbsp; <span id="sc-total">0 answered</span></div>
+        <div class="sc-bar-wrap" style="flex:1;max-width:200px"><div class="sc-bar" id="sc-bar" style="width:0%"></div></div>
+      </div>
+      <div class="machine-card">
+        <div class="sec-lbl">Convert this measurement</div>
+        <div class="from-val" id="m-from">—</div>
+        <div class="to-label">→ in <strong id="m-to-unit">cm</strong></div>
+        <div class="ch-opts" id="m-opts"></div>
+        <div class="m-reveal" id="m-reveal"></div>
+        <div class="fact-box" id="fact-box"></div>
+      </div>
+      <button class="step-btn primary" id="m-next" onclick="nextMachineQ()" style="display:none;align-self:flex-start">Next question →</button>
+    </div>
+  </div>
+
+  <div class="insight-strip">
+    <strong>Key fact:</strong> 1 metre = 100 centimetres. To convert m → cm, multiply by 100. To convert cm → m, divide by 100.
+  </div>
 
 </div>
 <script>
+
 // ── ROPE DATA ──────────────────────────────────────────────────────────────────
 const ROPES=[{cm:50,label:'50 cm',color:'#6D28D9'},{cm:75,label:'75 cm',color:'#0369A1'},{cm:100,label:'1 m',color:'#D4621A'},{cm:120,label:'1 m 20 cm',color:'#7B4A9A'},{cm:150,label:'1 m 50 cm',color:'#2E7D32'},{cm:200,label:'2 m',color:'#B45309'},{cm:240,label:'2 m 40 cm',color:'#0E7C7B'},{cm:300,label:'3 m',color:'#C2410C'}];
 let bench=[];
@@ -276,13 +251,13 @@ window.addEventListener('resize',resizeCvs);
 function fmtCm(cm){const m=Math.floor(cm/100),c=cm%100;if(m===0)return c+' cm';if(c===0)return m+' m';return m+' m '+c+' cm'}
 function drawBench(){
   const W=cvs.width,H=cvs.height;ctx.clearRect(0,0,W,H);
-  ctx.fillStyle='#8B6914';ctx.fillRect(0,0,W,H);
+  ctx.fillStyle='#f4f8ff';ctx.fillRect(0,0,W,H);
   for(let i=0;i<W;i+=22){ctx.strokeStyle='rgba(0,0,0,0.05)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,H);ctx.stroke()}
   const PAD=18,ropeY=H/2,ROPE_H=28,MAX_W=W-PAD*2;
-  if(bench.length===0){ctx.fillStyle='rgba(255,255,255,0.2)';ctx.font='italic 14px "Instrument Serif",serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Tap a rope above to place it here',W/2,ropeY);return}
+  if(bench.length===0){ctx.fillStyle='rgba(26,26,46,0.15)';ctx.font='italic 14px "Instrument Serif",serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText('Tap a rope above to place it here',W/2,ropeY);return}
   const totalCm=bench.reduce((a,r)=>a+r.cm,0);
   const scale=Math.min(MAX_W/totalCm,2.2);
-  for(let m=100;m<=totalCm;m+=100){const mx=PAD+m*scale;ctx.strokeStyle='rgba(255,255,255,0.35)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(mx,ropeY-ROPE_H/2-8);ctx.lineTo(mx,ropeY+ROPE_H/2+8);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(255,255,255,0.45)';ctx.font='bold 9px "Space Mono",monospace';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText((m/100)+'m',mx,ropeY-ROPE_H/2-10)}
+  for(let m=100;m<=totalCm;m+=100){const mx=PAD+m*scale;ctx.strokeStyle='rgba(26,26,46,0.3)';ctx.lineWidth=1.5;ctx.setLineDash([4,3]);ctx.beginPath();ctx.moveTo(mx,ropeY-ROPE_H/2-8);ctx.lineTo(mx,ropeY+ROPE_H/2+8);ctx.stroke();ctx.setLineDash([]);ctx.fillStyle='rgba(26,26,46,0.4)';ctx.font='bold 9px "Space Mono",monospace';ctx.textAlign='center';ctx.textBaseline='bottom';ctx.fillText((m/100)+'m',mx,ropeY-ROPE_H/2-10)}
   let x=PAD;
   bench.forEach((r,i)=>{
     const rw=r.cm*scale;
@@ -292,14 +267,14 @@ function drawBench(){
     ctx.strokeStyle='rgba(0,0,0,0.1)';ctx.lineWidth=3;
     for(let sx=x-ROPE_H;sx<x+rw+ROPE_H;sx+=10){ctx.beginPath();ctx.moveTo(sx,ropeY-ROPE_H/2);ctx.lineTo(sx+ROPE_H,ropeY+ROPE_H/2);ctx.stroke()}
     ctx.restore();
-    ctx.fillStyle='rgba(255,255,255,0.22)';ctx.beginPath();ctx.roundRect(x+4,ropeY-ROPE_H/2+3,rw-8,7,3);ctx.fill();
-    if(rw>44){ctx.fillStyle='rgba(255,255,255,0.92)';ctx.font=`bold ${Math.min(11,Math.max(9,rw/r.label.length))}px "Space Mono",monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(r.label,x+rw/2,ropeY)}
+    ctx.fillStyle='rgba(255,255,255,0.4)';ctx.beginPath();ctx.roundRect(x+4,ropeY-ROPE_H/2+3,rw-8,7,3);ctx.fill();
+    if(rw>44){ctx.fillStyle='rgba(255,255,255,0.95)';ctx.font=`bold ${Math.min(11,Math.max(9,rw/r.label.length))}px "Space Mono",monospace`;ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(r.label,x+rw/2,ropeY)}
     if(i>0){ctx.fillStyle='#C8A045';ctx.beginPath();ctx.arc(x,ropeY,7,0,Math.PI*2);ctx.fill();ctx.fillStyle='#8B6010';ctx.beginPath();ctx.arc(x,ropeY,4,0,Math.PI*2);ctx.fill()}
     if(i===0){ctx.fillStyle='#C8A045';ctx.beginPath();ctx.arc(x,ropeY,5,0,Math.PI*2);ctx.fill()}
     x+=rw;
   });
   if(bench.length>0){ctx.fillStyle='#C8A045';ctx.beginPath();ctx.arc(x,ropeY,5,0,Math.PI*2);ctx.fill()}
-  ctx.fillStyle='rgba(255,255,255,0.85)';ctx.font='bold 11px "Space Mono",monospace';ctx.textAlign='left';ctx.textBaseline='bottom';
+  ctx.fillStyle='rgba(26,26,46,0.75)';ctx.font='bold 11px "Space Mono",monospace';ctx.textAlign='left';ctx.textBaseline='bottom';
   ctx.fillText('← '+fmtCm(bench.reduce((a,r)=>a+r.cm,0))+' total →',PAD,ropeY-ROPE_H/2-12);
   updateTotal(bench.reduce((a,r)=>a+r.cm,0));
 }
@@ -327,7 +302,34 @@ function clearBench(){bench=[];drawBench();document.getElementById('conv-tag').c
 // tools
 let activeTool='cut';
 function setTool(t){activeTool=t;document.querySelectorAll('.tool-tab').forEach((b,i)=>b.classList.toggle('on',['cut','repeat','compare'][i]===t));document.querySelectorAll('.tool-pane').forEach((p,i)=>p.classList.toggle('on',['cut','repeat','compare'][i]===t))}
-function doCut(){const cm=parseInt(document.getElementById('cut-rope').value),by=parseInt(document.getElementById('cut-by').value),piece=cm/by;const res=document.getElementById('cut-result');const MAX=220;res.innerHTML='';const bars=document.createElement('div');bars.className='tr-bars';for(let i=0;i<by;i++){if(i>0){const pl=document.createElement('span');pl.className='tr-plus';pl.textContent='+';bars.appendChild(pl)}const w=Math.max(36,Math.round(piece/500*MAX));const bar=document.createElement('div');bar.className='tr-bar';bar.style.cssText=`width:${w}px;background:var(--orange)`;bar.textContent=fmtCm(piece);bars.appendChild(bar)}const eq=document.createElement('div');eq.className='tr-eq';eq.textContent=`${fmtCm(cm)} ÷ ${by} = ${fmtCm(piece)} each`;res.appendChild(bars);res.appendChild(eq)}
+function doCut(){
+  const cm=parseInt(document.getElementById('cut-rope').value);
+  const by=parseInt(document.getElementById('cut-by').value);
+  const piece=Math.round(cm/by*10)/10;
+  const res=document.getElementById('cut-result');
+  const MAX=280;res.innerHTML='';
+  // Visual rope pieces (rope-style like the bench)
+  const ropeWrap=document.createElement('div');
+  ropeWrap.style.cssText='display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px;background:#f8f8f8;border-radius:12px;border:1.5px solid #e0e0e0;margin-bottom:8px';
+  const ROPE_H=26;
+  const colors=['#6D28D9','#0369A1','#D4621A','#7B4A9A','#2E7D32','#B45309'];
+  for(let i=0;i<by;i++){
+    if(i>0){const sc=document.createElement('span');sc.style.cssText='font-size:18px;font-weight:900;color:var(--ink3)';sc.textContent='✂';ropeWrap.appendChild(sc)}
+    const w=Math.max(50,Math.round(piece/500*MAX));
+    const col=colors[i%colors.length];
+    const rope=document.createElement('div');
+    rope.style.cssText=`position:relative;width:${w}px;height:${ROPE_H}px;border-radius:6px;background:${col};overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center`;
+    // rope texture
+    rope.innerHTML=`<div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 6px,rgba(0,0,0,0.1) 6px,rgba(0,0,0,0.1) 7px)"></div>`
+      +`<span style="position:relative;font-family:var(--mono);font-size:10px;font-weight:700;color:rgba(255,255,255,0.95)">${fmtCm(piece)}</span>`;
+    ropeWrap.appendChild(rope);
+  }
+  res.appendChild(ropeWrap);
+  const eq=document.createElement('div');
+  eq.style.cssText='font-family:var(--mono);font-size:14px;font-weight:700;color:var(--ink);padding:8px 12px;background:#e8faf9;border-radius:10px;border:1.5px solid var(--teal)';
+  eq.textContent=`${fmtCm(cm)} ÷ ${by} = ${fmtCm(piece)} each`;
+  res.appendChild(eq);
+}
 function doRepeat(){const cm=parseInt(document.getElementById('rep-rope').value),by=parseInt(document.getElementById('rep-by').value),total=cm*by;const res=document.getElementById('rep-result');const MAX=220;res.innerHTML='';const bars=document.createElement('div');bars.className='tr-bars';const baseW=Math.max(30,Math.round(cm/500*MAX));for(let i=0;i<by;i++){if(i>0){const pl=document.createElement('span');pl.className='tr-plus';pl.textContent='+';bars.appendChild(pl)}const bar=document.createElement('div');bar.className='tr-bar';bar.style.cssText=`width:${baseW}px;background:var(--teal)`;bar.textContent=fmtCm(cm);bars.appendChild(bar)}const eq=document.createElement('div');eq.className='tr-eq';eq.textContent=`${fmtCm(cm)} × ${by} = ${fmtCm(total)}`;res.appendChild(bars);res.appendChild(eq)}
 function doCompare(){const a=parseInt(document.getElementById('cmp-a').value),b=parseInt(document.getElementById('cmp-b').value),mx=Math.max(a,b);const MAX=220;const res=document.getElementById('cmp-result');res.innerHTML=`<div class="cmp-row"><div class="cmp-lbl">${fmtCm(a)}</div><div class="cmp-bar" style="width:${Math.round(a/mx*MAX)}px;background:var(--teal)"></div><span class="cmp-len">${a} cm</span></div><div class="cmp-row"><div class="cmp-lbl">${fmtCm(b)}</div><div class="cmp-bar" style="width:${Math.round(b/mx*MAX)}px;background:var(--orange)"></div><span class="cmp-len">${b} cm</span></div><div class="diff-pill">Difference: ${fmtCm(Math.abs(a-b))}</div>`}
 
@@ -392,12 +394,13 @@ function nextMachineQ(){
 }
 // tab
 function switchTab(t){
-  ['learn','practice'].forEach(x=>document.getElementById('pnl-'+x).classList.toggle('on',x===t));
-  document.querySelectorAll('.tab').forEach((b,i)=>b.classList.toggle('on',['learn','practice'][i]===t));
+  ['learn','practice'].forEach(x=>document.getElementById('pnl-'+x).style.display=(x===t?'block':'none'));
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('on',['learn','practice'][i]===t));
   if(t==='practice'){nextMachineQ();setTimeout(resizeCvs,50)}
   if(t==='learn')setTimeout(resizeCvs,50);
 }
 buildStore();resizeCvs();nextMachineQ();
+
 </script>
 </body>
 </html>
